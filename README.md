@@ -11,4 +11,9 @@ The criteria supports at least one operator from each of the following categorie
 2.4. Property is less than some value
 
 how to build: mvn clean package
+how to run: java -jar ./target/coding-exercise-1.0-SNAPSHOT.jar
+
+Application (App) will run creating set of criteria and evaluate them against funding opportunity.
+using assert in every case  
+
 
