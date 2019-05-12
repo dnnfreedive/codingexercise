@@ -11,6 +11,10 @@ public interface Criteria {
 
     void propertyShouldBeEqual(String property, String value);
 
+    void propertyShouldBeLessThanValue(String property, String value);
+
+    void proeprtyShouldBeGreaterThanValue(String proprty, String value);
+
     void andFulfillCriteria(Criteria criteria);
 
     void orFulfillCriteria(Criteria criteria);

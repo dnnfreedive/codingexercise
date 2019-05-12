@@ -31,6 +31,18 @@ public class FundingCriteria implements Criteria {
     }
 
     @Override
+    public void propertyShouldBeLessThanValue(String property, String value) {
+        predicate = CriteriaPredicates.isPropertyValueLessThenValue(property, value);
+    }
+
+    @Override
+    public void proeprtyShouldBeGreaterThanValue(String property, String value) {
+        predicate = CriteriaPredicates.isPropertyValueGreaterThenValue(property, value);
+
+    }
+
+
+    @Override
     public void andFulfillCriteria(Criteria criteria) {
         this.predicate = CriteriaPredicates.andPredicate(this.predicate, criteria.getPredicate());
 

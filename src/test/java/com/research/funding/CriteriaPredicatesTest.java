@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class CriteriaPredicatesTest {
 
     @Test
-    public void isPropertyPresent() {
+    public void isPropertyPresentTest() {
         val funding = new HashMap<String, String>();
         funding.put("name", "NIH");
         assertTrue(Optional.of(funding).filter(CriteriaPredicates.isPropertyPresent("name")).isPresent());
@@ -21,15 +21,16 @@ public class CriteriaPredicatesTest {
     }
 
     @Test
-    public void isPropertyValueEquals() {
+    public void isPropertyValueEqualsTest() {
         val funding = new HashMap<String, String>();
         funding.put("name", "NIH");
         assertTrue(Optional.of(funding).filter(CriteriaPredicates.isPropertyValueEquals("name", "NIH")).isPresent());
         assertFalse(Optional.of(funding).filter(CriteriaPredicates.isPropertyValueEquals("name", "Gates")).isPresent());
     }
 
+
     @Test
-    public void andPredicate() {
+    public void andPredicateTest() {
         val funding = new HashMap<String, String>();
         funding.put("name", "NIH");
         assertTrue(Optional.of(funding).filter(CriteriaPredicates.andPredicate(CriteriaPredicates.isPropertyPresent("name"),
@@ -39,7 +40,7 @@ public class CriteriaPredicatesTest {
     }
 
     @Test
-    public void orPredicate() {
+    public void orPredicateTest() {
         val funding = new HashMap<String, String>();
         funding.put("name", "NIH");
         assertTrue(Optional.of(funding).filter(CriteriaPredicates.andPredicate(CriteriaPredicates.isPropertyPresent("name"),
@@ -51,9 +52,37 @@ public class CriteriaPredicatesTest {
     }
 
     @Test
-    public void notPredicate() {
+    public void notPredicateTest() {
         val funding = new HashMap<String, String>();
         funding.put("name", "NIH");
         assertTrue(Optional.of(funding).filter(CriteriaPredicates.notPredicate(CriteriaPredicates.isPropertyPresent("address"))).isPresent());
+    }
+
+    @Test
+    public void isPropertyValueLessThenValueTest() {
+        val funding = new HashMap<String, String>();
+        funding.put("amount", "1000");
+        funding.put("name", "Healthcare");
+        assertTrue(Optional.of(funding).filter(CriteriaPredicates.isPropertyValueLessThenValue("amount", "50000")).isPresent());
+        assertTrue(Optional.of(funding).filter(CriteriaPredicates.isPropertyValueLessThenValue("name", "Healthcare technology research")).isPresent());
+    }
+
+    @Test
+    public void isPropertyValueGreaterThenValue() {
+        val funding = new HashMap<String, String>();
+        funding.put("amount", "1000");
+        funding.put("name", "Healthcare");
+        assertFalse(Optional.of(funding).filter(CriteriaPredicates.isPropertyValueGreaterThenValue("amount", "50000")).isPresent());
+        assertFalse(Optional.of(funding).filter(CriteriaPredicates.isPropertyValueGreaterThenValue("name", "Healthcare technology research")).isPresent());
+    }
+
+    @Test
+    public void lessValue() {
+        assertTrue(CriteriaPredicates.lessValue("1000", "5000"));
+    }
+
+    @Test
+    public void greaterValue() {
+        assertTrue(CriteriaPredicates.greaterValue("Healthcare technology research", "Healthcare"));
     }
 }

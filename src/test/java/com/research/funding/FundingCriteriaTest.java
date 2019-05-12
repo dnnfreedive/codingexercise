@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 public class FundingCriteriaTest {
 
@@ -40,6 +39,34 @@ public class FundingCriteriaTest {
         criteria.propertyShouldBeEqual("name", "Gates");
         assertFalse(criteria.matches(funding));
     }
+
+    @Test
+    public void propertyShouldBeLessThanValue() {
+        val funding = new HashMap<String, String>();
+        funding.put("name", "NIH");
+        funding.put("amount", "1000");
+
+        Criteria criteria = new FundingCriteria();
+
+        criteria.propertyShouldBeLessThanValue("name", "National Institutes of Health");
+        assertTrue(criteria.matches(funding));
+        criteria.propertyShouldBeLessThanValue("amount", "5000");
+        assertTrue(criteria.matches(funding));
+    }
+    @Test
+    public void propertyShouldBeGreaterThanValue() {
+        val funding = new HashMap<String, String>();
+        funding.put("name", "National Institutes of Health");
+        funding.put("amount", "1000");
+
+        Criteria criteria = new FundingCriteria();
+
+        criteria.proeprtyShouldBeGreaterThanValue("name", "NIH");
+        assertTrue(criteria.matches(funding));
+        criteria.proeprtyShouldBeGreaterThanValue("amount", "5000");
+        assertFalse(criteria.matches(funding));
+    }
+
 
     @Test
     public void andFulfillCriteria() {
