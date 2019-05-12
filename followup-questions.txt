@@ -1,0 +1,13 @@
+Questions
+1. What enhancements might you make to your solution given more time?
+
+I’d spend more time on less/greater predicates to handle date type as well as string, decimal.
+I’d add logging.
+I’d externalise funding opportunities into external json file and make tests (and app itself) read this file as an input
+
+2. What considerations would you take if releasing this as a production application?
+Considering releasing this API to production I’d review how this API will actually be used
+- i.e. how funding opportunities will be streamed with criteria applied and successful ones will be collected (ones which satisfy complex criteria)
+Will apply Enhancements from above
+Will add API documentation
+
