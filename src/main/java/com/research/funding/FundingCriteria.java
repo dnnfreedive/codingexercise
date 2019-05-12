@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+
 public class FundingCriteria implements Criteria {
 
     private Predicate<Map<String,String>> predicate;
@@ -36,7 +37,7 @@ public class FundingCriteria implements Criteria {
     }
 
     @Override
-    public void proeprtyShouldBeGreaterThanValue(String property, String value) {
+    public void propertyShouldBeGreaterThanValue(String property, String value) {
         predicate = CriteriaPredicates.isPropertyValueGreaterThenValue(property, value);
 
     }
@@ -55,7 +56,7 @@ public class FundingCriteria implements Criteria {
     }
 
     @Override
-    public void notCriteria(Criteria criteria) {
+    public void notCriteria() {
         this.predicate = CriteriaPredicates.notPredicate(this.predicate);
     }
 

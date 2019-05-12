@@ -13,13 +13,13 @@ public interface Criteria {
 
     void propertyShouldBeLessThanValue(String property, String value);
 
-    void proeprtyShouldBeGreaterThanValue(String proprty, String value);
+    void propertyShouldBeGreaterThanValue(String property, String value);
 
     void andFulfillCriteria(Criteria criteria);
 
     void orFulfillCriteria(Criteria criteria);
 
-    void notCriteria(Criteria criteria);
+    void notCriteria();
 
     Predicate<Map<String, String>> getPredicate();
 

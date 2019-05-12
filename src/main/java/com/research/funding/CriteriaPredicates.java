@@ -5,31 +5,31 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class CriteriaPredicates {
+class CriteriaPredicates {
 
-    public static Predicate<Map<String, String>> isPropertyPresent(String property) {
+    static Predicate<Map<String, String>> isPropertyPresent(String property) {
         return p->p.containsKey(property);
     }
-    public static Predicate<Map<String, String>> isPropertyValueEquals(String property, String value) {
-        return p-> Optional.ofNullable(p.get(property).equals(value)).orElse(false);
+    static Predicate<Map<String, String>> isPropertyValueEquals(String property, String value) {
+        return p-> Optional.of(p.get(property).equals(value)).orElse(false);
     }
 
-    public static Predicate<Map<String, String>> isPropertyValueLessThenValue(String property, String value) {
-        return p-> Optional.ofNullable(lessValue(p.get(property),value)).orElse(false);
+    static Predicate<Map<String, String>> isPropertyValueLessThenValue(String property, String value) {
+        return p-> Optional.of(lessValue(p.get(property),value)).orElse(false);
     }
 
-    public static Predicate<Map<String, String>> isPropertyValueGreaterThenValue(String property, String value) {
-        return p-> Optional.ofNullable(greaterValue(p.get(property),value)).orElse(false);
+    static Predicate<Map<String, String>> isPropertyValueGreaterThenValue(String property, String value) {
+        return p-> Optional.of(greaterValue(p.get(property),value)).orElse(false);
     }
-    public static Predicate<Map<String, String>> andPredicate(Predicate<Map<String, String>> predicateLeft, Predicate<Map<String, String>> predicateRight){
+    static Predicate<Map<String, String>> andPredicate(Predicate<Map<String, String>> predicateLeft, Predicate<Map<String, String>> predicateRight){
         return predicateLeft.and(predicateRight);
     }
 
-    public static Predicate<Map<String, String>> orPredicate(Predicate<Map<String, String>> predicateLeft, Predicate<Map<String, String>> predicateRight){
+    static Predicate<Map<String, String>> orPredicate(Predicate<Map<String, String>> predicateLeft, Predicate<Map<String, String>> predicateRight){
         return predicateLeft.or(predicateRight);
     }
 
-    public static Predicate<Map<String, String>> notPredicate(Predicate<Map<String, String>> predicate){
+    static Predicate<Map<String, String>> notPredicate(Predicate<Map<String, String>> predicate){
         return predicate.negate();
     }
 

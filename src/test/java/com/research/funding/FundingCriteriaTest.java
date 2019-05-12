@@ -1,21 +1,17 @@
 package com.research.funding;
 
-import lombok.val;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
 public class FundingCriteriaTest {
 
     @Test
-    public void matches() {
-    }
-
-    @Test
-    public void shouldContainProperty() {
-        val funding = new HashMap<String, String>();
+    public void shouldContainPropertyTest() {
+        Map<String,String> funding = new HashMap<>();
         funding.put("name", "NIH");
 
         Criteria criteria = new FundingCriteria();
@@ -28,8 +24,8 @@ public class FundingCriteriaTest {
     }
 
     @Test
-    public void propertyShouldBeEqual() {
-        val funding = new HashMap<String, String>();
+    public void propertyShouldBeEqualTest() {
+        Map<String,String> funding = new HashMap<>();
         funding.put("name", "NIH");
 
         Criteria criteria = new FundingCriteria();
@@ -41,8 +37,8 @@ public class FundingCriteriaTest {
     }
 
     @Test
-    public void propertyShouldBeLessThanValue() {
-        val funding = new HashMap<String, String>();
+    public void propertyShouldBeLessThanValueTest() {
+        Map<String,String> funding = new HashMap<>();
         funding.put("name", "NIH");
         funding.put("amount", "1000");
 
@@ -54,23 +50,23 @@ public class FundingCriteriaTest {
         assertTrue(criteria.matches(funding));
     }
     @Test
-    public void propertyShouldBeGreaterThanValue() {
-        val funding = new HashMap<String, String>();
+    public void propertyShouldBeGreaterThanValueTest() {
+        Map<String,String> funding = new HashMap<>();
         funding.put("name", "National Institutes of Health");
         funding.put("amount", "1000");
 
         Criteria criteria = new FundingCriteria();
 
-        criteria.proeprtyShouldBeGreaterThanValue("name", "NIH");
+        criteria.propertyShouldBeGreaterThanValue("name", "NIH");
         assertTrue(criteria.matches(funding));
-        criteria.proeprtyShouldBeGreaterThanValue("amount", "5000");
+        criteria.propertyShouldBeGreaterThanValue("amount", "5000");
         assertFalse(criteria.matches(funding));
     }
 
 
     @Test
-    public void andFulfillCriteria() {
-        val funding = new HashMap<String, String>();
+    public void andFulfillCriteriaTest() {
+        Map<String,String> funding = new HashMap<>();
         funding.put("name", "NIH");
         funding.put("address", "Bethesda");
 
@@ -103,10 +99,34 @@ public class FundingCriteriaTest {
     }
 
     @Test
-    public void orFulfillCriteria() {
+    public void orFulfillCriteriaTest() {
+        Map<String,String> funding = new HashMap<>();
+        funding.put("name", "NIH");
+        funding.put("address", "Bethesda");
+
+        Criteria criteria = new FundingCriteria();
+        criteria.propertyShouldBeEqual("name", "NIH");
+
+        Criteria yetAnotherCriteria = new FundingCriteria();
+        yetAnotherCriteria.propertyShouldBeEqual("address", "NYC");
+
+        criteria.orFulfillCriteria(yetAnotherCriteria);
+
+        assertTrue(criteria.matches(funding));
+
     }
 
     @Test
-    public void notCriteria() {
+    public void notCriteriaTest() {
+
+        Map<String,String> funding = new HashMap<>();
+        funding.put("name", "NIH");
+        funding.put("address", "Bethesda");
+
+        Criteria criteria = new FundingCriteria();
+        criteria.propertyShouldBeEqual("name", "Gates");
+        criteria.notCriteria();
+
+        assertTrue(criteria.matches(funding));
     }
 }
